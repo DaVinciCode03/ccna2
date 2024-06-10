@@ -1,0 +1,16 @@
+{
+    "aironet": [
+        {
+            "host_ip": "10.11.10.3",
+            "hostname": "11-VinceAccessPoint",
+            "username": "admin",
+            "password": "pass",
+            "SSID": "11-RESORTWORLDS@7-VINCE",
+            "authentication": "Open",
+            "key-man":"WPA",
+            "Wifi-pass": "C1sc0123",
+            "channel": "12",
+            "enc-mod": "tkip" 
+        }
+    ]
+}
