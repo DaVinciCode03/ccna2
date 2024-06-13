@@ -170,8 +170,10 @@ the Basics for Firewalls.
 before: nmap -v 10.m.100.8
 @Cucm:
 config t
-int fa 0/0
- ip add 10.m.100.9 255.255.255.0 Secondary
+int Gi 3
+no shutdown
+ip add 192.168.103.8 255.255.255.0 
+ip add 192.168.103.9 255.255.255.0 Secondary
 service finger
 service tcp-small-servers
 service udp-small-servers
@@ -179,15 +181,17 @@ ip dns server
 ip http server
 ip http secure-server
 !Make Ping EASY
-ip host pc 10.m.1.10
-ip host cm 10.m.100.8
-ip host cm2 10.m.100.9
-ip host p1 10.m.100.101
-ip host p2 10.m.100.102
-ip host c6 10.m.50.6
-ip host c8 10.m.50.8
-ip host sw 10.m.1.4
-ip host ed 10.m.m.1
+ip host www.web8.com 192.168.103.8
+ip host www.web9.com 192.168.103.9
+ip host pc 10.11.1.10
+ip host cm 10.11.100.8
+ip host cm2 10.11.100.9
+ip host p1 10.11.100.101
+ip host p2 10.11.100.102
+ip host c6 10.11.50.6
+ip host c8 10.11.50.8
+ip host sw 10.11.1.4
+ip host ed 10.11.11.1
 
 TASK7: Enter the World of BlueTeam: Protect vs Redteam: Attack, 
 BlueTeam: UTM: unified Threat management:
@@ -201,18 +205,135 @@ Top 5 UTM: 1.FortinetFortigate:
            2. Checkpoint
            3.4 Cisco
 
+CYBERSECURITY TASK7: PROTECTING YOUR CORPORATE WEB APPS.
+EX.1 CREATE A FIREWALL POLICY NAMED PROWEBAPP1  TO OPEN
+WWW.WEB8.COM HAS HTTP AND HTTPS AS OPEN
+WWW.WEB9.COM HAS SSH AND DNS OPEN
+formula:       PROTOCOL    HACKER    VICTIM     PORT
+config t
+no ip access-list extended PROWEBAPP1 
+ip access-list extended PROWEBAPP1
+Permit tcp any host www.web8.com eq 80 log
+Permit tcp any host www.web8.com eq 443 log
+Permit tcp any host www.web9.com eq 22 log 
+Permit tcp any host www.web9.com eq 53 log
+interface Gi 3
+ ip access-group PROWEBAPP1 in
+do sh ip access-list PROWEBAPP1
 
 
+EX.1 CREATE A FIREWALL POLICY NAMED PROWEBAPP2  TO OPEN
+WWW.WEB8.COM HAS  HTTPS AS OPEN
+WWW.WEB9.COM HAS HTTPS OPEN
+formula:       PROTOCOL    HACKER    VICTIM     PORT
+config t
+no ip access-list extended PROWEBAPP1 
+ip access-list extended PROWEBAPP1
+DENY tcp any host www.web8.com eq 80 log
+Permit tcp any host www.web8.com eq 443 log
+DENY tcp any host www.web9.com eq 22 log 
+DENY tcp any host www.web9.com eq 53 log
+Permit tcp any host www.web9.com eq 443 log
+interface Gi 3
+ ip access-group PROWEBAPP1 in
+do sh ip access-list PROWEBAPP1
 
 
+EX.1 CREATE A FIREWALL POLICY NAMED PROWEBAPP3  TO OPEN
+WWW.WEB8.COM HAS DNS,SSH,HTTP,TELNET AS OPEN
+WWW.WEB9.COM HAS TELNET,HTTPS,SSH OPEN
+
+config t
+no ip access-list extended PROWEBAPP3
+ip access-list extended PROWEBAPP3
+PERMIT tcp any host www.web8.com eq 80 log
+Permit tcp any host www.web8.com eq 23 log
+Permit tcp any host www.web8.com eq 53 log
+Permit tcp any host www.web8.com eq 22 log
+Deny tcp any host www.web9.com eq 80 log
+Permit tcp any host www.web9.com eq 443 log
+Permit tcp any host www.web9.com eq 23 log
+Permit tcp any host www.web9.com eq 22 log
+interface Gi 3
+ ip access-group PROWEBAPP3 in
+do sh ip access-list PROWEBAPP3
 
 
+EX.1 CREATE A FIREWALL POLICY NAMED PROWEBAPP3  TO OPEN
+WWW.WEB8.COM HAS PING,DNS, HTTPS AS OPEN
+WWW.WEB9.COM HAS EVERYTHING
+
+config t
+no ip access-list extended PROWEBAPP3
+ip access-list extended PROWEBAPP3
+PERMIT ICMP any host www.web8.com 
+Deny tcp any host www.web8.com eq 23 log
+Permit tcp any host www.web8.com eq 53 log
+Permit tcp any host www.web8.com eq 443 log
+Deny tcp any host www.web8.com eq 22 log
+Deny tcp any host www.web9.com eq 80 log
+Permit iP any host www.web9.com 
+
+interface Gi 3
+no ip access-group PROWEBAPP3 in
+do sh ip access-list PROWEBAPP3
 
 
+EX.5 CREATE A FIREWALL POLICY NAMED LASTFWP  TO OPEN
+WWW.WEB8.COM HAS ping,chargen,finger,http as OPEN
+WWW.WEB9.COM HAS ssh,telnet,daytime, dns, https as OPEN
+if you cannot make the POLICY, you work in Jollibee
+config t
+no ip access-list extended LASTFWP
+ip access-list extended LASTFWP
+PERMIT ICMP any host www.web8.com 
+permit tcp any host www.web8.com eq 19 log
+Permit tcp any host www.web8.com eq 79 log
+Permit tcp any host www.web8.com eq 80 log
+permit tcp any host www.web9.com eq 22 log
+permit tcp any host www.web9.com eq 23 log
+permit tcp any host www.web9.com eq 13 log
+permit tcp any host www.web9.com eq 53 log
+permit tcp any host www.web9.com eq 443 log
+interface Gi 3
+no ip access-group PROWEBAPP3 in
+do sh ip access-list PROWEBAPP3
 
 
+TASK8: CONFIGURING CISCO NETWORK SERVICES:
+NETWORK TIME PROTOCOL OR NTP 
+is a layer 7 protocol using UDP 123
+config t
+ntp server 216.239.35.8
+end
+show ntp associations
 
+TASK9:NAT:NETWORK ADDRESS TRANSLATION SERVICE:
+nat, proxy, hotspot, tethering = PENGE INTERNET
+Give internet to your entire building using cisco
+STEP1: Define INSIDE AND OUTSIDE:
+STEP2: create access-list to permit IP of Inside:
+Step3: Create a NAT pool with overload
+@vpnPH:
+config t
+int gi 1
+ip nat OUTSIDE
+int gi 2
+ip nat INSIDE
+ip gi 3
+ip nat INSIDE
+no access-list 7
+access-list 7 permit 192.168.102.0 0.0.0.255
+access-list 7 permit 192.168.103.0 0.0.0.255
+ip nat inside source list 7 interface Gi 1 overload
+ip nat inside source static 192.168.102.69 192.168.108.69
+ip nat inside source static 192.168.103.88 192.168.108.88
+end
 
+TASK 10: DO YOU WANT TO BE REPLACED BY A.I AT WORK? REPLACED BY
+YOUNGER, SMARTER, CHEAPER NEW HIRES?? HOW TO BE UNTOUCHABLE EMPLOYEE
+IF YOU WANT HAYUP/SIX DIGITS SWELDO/UNTOUCHABLE STATUS.
+YOU NEED HAYUP/SIX DIGITS SWELDO Habits.
 
 
 
