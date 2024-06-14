@@ -1,0 +1,167 @@
+1. Design a call center for accenture.com using 10.0.0.0 /8 with 380 agents, PMs, Team Leads.
+
+Rivan CSI Method
+
+C - Convert IT: 380 = 9 bits
+
+S- Subtract IT : /32 - /9 = /23, 3rd, 2i
+
+- Ipasok sa Hiwa! : ipasok 2i sa 3rd
+
+accenture.com = 10.0.2.0/23 +1
+1st Valid: 10.0.2.1/23 - 10.0.3.254 /23 
+LAST IP:10.0.3.255/23
+
+NOT Accenture: 10.0.4.0/23 - 1
+
+Ex 2: Design Sykes.com network using 10.0.0.0/8 with 2,500 agents and users:
+
+C: 2500 = 12bits
+S: - /32 - /12 = /20, 3rd,16i
+I: ipasok si 16 sa 3rd
+
+Sykes = 10.0.16.0/20
+1st Valid: 10.0.16.1/20
+Last IP: 10.0.31.255/20
+
+NOT Sykes: 10.0.32.0/20 
+
+ex3: Design and configure pnp.gov.ph network with 55 emergency responders using 10.0.0.0/8
+
+C: 55 = 6 BITS
+S: /32 - /6 = /26, 4th, 64i
+I: ipasok si 64 sa 4th
+
+PNP: 10.0.0.64 /26
+
+First Valid: 10.0.0.65 /26 - 10.0.0.126 / 26
+LAST IP: 10.0.0.127 / 26
+
+NOT PNP: 10.0.0.128 /26
+
+
+Ex 4: Design a network for Concentrix with 4900 agents using 10.0.0.0/8
+
+C: 4900 = 13 
+S: /32 - /13 = /19 3rd, 32i
+I: Ipasok si 32 sa 3rd
+
+Concentrix.com
+First Valid: 10.0.32.1/19 - 10.0.63.254/19
+Last IP: 10.0.63.255/19
+
+Not Concentrix: 10.0.64.0/19 
+
+
+
+
+Ex 5: Design and Implement TELUS.COM network with 850 agents and Team Leaders 
+
+C- 850 - 10 bits
+S- /32 - /10 = /22, 3rd,4i
+I = pasok si 4 sa 3rd
+
+TELUS: 10.0.4.0 /22
+First: 10.0.4.1/22 - 10.0.7.254/22
+LAST VALID IP: 10.0.7.255/22
+
+NOT TELUS: 10.0.8.0/22
+
+Ex 6:E-Design and Implement E-Telecare.com network with 1669
+
+C - 1669 - 11
+S /32 - /11 = /21 3rd,8i
+I pasok si 8th sa 3rd
+
+Telecare = 0.0.8.0 / 21
+First: 0.0.8.1 /21 - 0.0.15.254/21
+Last: 0.0.15.255/21 
+not telecare = 0.0.16.0/21
+
+Ex 7: Design and Implement GSIS.Gov.PH using 10.0.0.0/8 with 240 
+
+C: 8 BITS
+S: /32 - /8 = /24, 3rd,1i
+I: Ipasok si 1 sa 3rd
+
+GSIS.GOV.PH: 10.0.1.0/24
+First: 10.0.1.1/24 - 10.0.1.254
+Last: 10.0.1.255/24
+NOT: 10.0.2.0/24
+
+TASK 2: LEARNING 5 Hit combo of subnetting
+
+1. Get the network
+2. Get the valid range
+3. Get the broadcast
+4. Get the all host
+5. Get All Subnets total
+
+
+Ex1: You found a laptop with the IP address of 192.168.10.99 /28 
+perform the 5 hit combo
+
+1.Anong 16i ang malapit sa 99:
+192.168.10.96/28 - 192.168.10.112
+2. Valid Range: 192.168.10.97 - 192.168.10.110
+3. broadcast 192.168.10.111
+4.host: /original > /now 14 hosts
+5. total subnets:
+/now - /orig =/28 - /24 = 2r4 = 16-2 = 14 subnets
+
+Ex2:You found a tablet with IP Address of 192.168.100.69 /27
+
+1.Find the network
+192.168.100.64 /27 -192.168.100.96 /27
+2. Valid Range: 192.168.100.65 - 192.168.100.94
+3.broadcast 192.168.100.95
+4. Constant = /32 - /5 = /27, 2r5 = 32 -2 = 30 hosts
+5. /orig + /_ = /27, 2r3 = 8 - 2 = 6 subnets 
+
+Ex3. You found a tablet with IP 192.168.50.77 / 26
+192.168.50.64 - 192.168.50.128
+2. 192.168.50.65 - 192.168.50.126
+3. 192.168.50.127
+4. /32 - /6 = /26, 2r6 = 
+
+Ex4. You found a gold laptop with IP 10.50.100.35 /19
+
+10.50.96.0 - 10.50.128.0
+2. 10.50.96.1 - 10.50.127.254
+3.10.50.127.255
+4. /32 - /13 =/ 19 = 8192
+
+Design and Configure DLSU.EDU.PH USING 10.0.0.0 with 2500 students
+
+C- 2500 - 12
+
+S - /32 - 12 = /20 3rd,16i
+
+I - pasok si 16 sa 3rd
+
+DLSU.EDU.PH: 10.0.16.0 / 20
+
+First Valid: 10.0.16.1 - 10.0.31.254
+Last Valid: 10.0.31.255
+
+NOT DLSU: 10.0.32.0 /20
+
+
+
+10.3.3.138 /24
+
+1. 10.3.3.0 - 10.3.6.0
+2. 10.3.3.1 - 10.3.5.254
+3. 10.3.39.255
+4. /32 - /8 = /24 2r8 = 128-2 = 126 hosts
+5. /8 + /16 = /24 2r16 - 32768 - 2 = 32766 subnets
+
+Task 3: Develop the skills of finding the network super quickly:
+
+1.192.168.10.49/27 = 192.168.10.32/27 - 192.168.10.64
+2.10.50.100.25/19 = 10.50.96./19 - 10.50.128.0
+3. 172.16.150.200/22 = 172.16.128.0/22 - 172.16.132.0
+4. 10.1.2.9/30 = 10.1.2.8 - 10.1.2.16/30
+5. 172.16.169.11/20 = 172.16.160.0/20
+6. 10.1.4.6/ 30 = 10.1.4.4/30
+7. 192.168.10.130/27 = 192.168.10.128/27

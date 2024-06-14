@@ -1,0 +1,32 @@
+TASK 4: CONFIGURING FIREWALLS
+
+TOP 5 FIREWALLS :NGFW:
+1. Palo Alto
+2. Checkpoint
+3. Cisco FirePower
+4. SonicWall
+
+TASK 5:HOW TO BE A HIGHLY PAID NETWORK ENGINEER
+ENGINEER: HAVE SOME SKILLS
+DNS SERVER
+WEB SERVER
+FTP SERVER
+TIME SERVER
+
+7 DNSentries to be legit:
+ns, ___, www, stmp,pop,imap,MX
+
+web server
+ftp server
+time server
+
+How to install DNS server and WEB server in Servers:
+cmd 
+powershell
+Install-WindowsFeature -name dns -includeManagementTools
+Install-WindowsFeature -name web-server -includeManagementTools
+
+TASK6: CREATING FAKE legit business email:
+
+Kimstore
+lazada

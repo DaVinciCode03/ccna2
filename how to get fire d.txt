@@ -1,0 +1,6 @@
+How to get fired immediately
+
+config t
+no ip routing 
+ip routing
+end

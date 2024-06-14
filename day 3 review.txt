@@ -1,0 +1,46 @@
+HOW TO GET FIRED AGAIN?
+
+conf t 
+no ip routing
+ip routing
+
+HOW TO CONFIGURE REAL WORLD BGP
+@R1
+
+conf t
+router bgp 1
+bgp log-neighbor-changes
+neighbor 209.9.9.3 remote-as 3
+neighbor 207.7.7.2 remote-as 2
+neighbor 208.8.8.4 remote-as 45
+network 209.9.9.0 mask 255.255.255.0
+network 207.7.7.0 mask 255.255.255.0
+network 208.8.8.0 mask 255.255.255.0
+network 10.1.1.0 mask 255.255.255.252
+
+@VPNJP
+
+config t 
+no logging console
+no ip domain lookup
+int gi 1
+ip add 200.0.0.10 255.255.255.0
+no shut
+int gi 3
+ip add 10.10.10.1 255.255.255.0
+no shut
+ip route 0.0.0.0 0.0.0.0 200.0.0.20
+end
+
+@VPNPH
+config t 
+no logging console
+no ip domain lookup
+int gi 1
+ip add 200.0.0.20 255.255.255.0
+no shut
+int gi 3
+ip add 10.20.20.1 255.255.255.0
+no shut
+ip route 0.0.0.0 0.0.0.0 200.0.0.10
+end
